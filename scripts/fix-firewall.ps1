@@ -1,12 +1,15 @@
 ﻿# Diagnostic + correction réseau pour que la Switch voie le serveur en "Parties LAN".
-# À lancer dans un PowerShell ouvert EN ADMINISTRATEUR :
+# Se relance tout seul en administrateur si besoin :
 #   powershell -ExecutionPolicy Bypass -File scripts\fix-firewall.ps1
 $ErrorActionPreference = 'Stop'
 
 $isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(
     [Security.Principal.WindowsBuiltInRole]::Administrator)
 if (-not $isAdmin) {
-    throw "Lance ce script dans un PowerShell ouvert en administrateur (clic droit > Exécuter en tant qu'administrateur)."
+    # Relance automatiquement le script en administrateur (Windows affiche une confirmation)
+    Write-Host 'Relance en administrateur...'
+    Start-Process powershell -Verb RunAs -ArgumentList "-NoExit -ExecutionPolicy Bypass -File `"$PSCommandPath`""
+    exit
 }
 
 $Root = Split-Path $PSScriptRoot -Parent
