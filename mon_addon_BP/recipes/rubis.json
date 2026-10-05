@@ -1,0 +1,11 @@
+{
+  "format_version": "1.21.0",
+  "minecraft:recipe_shaped": {
+    "description": { "identifier": "monaddon:rubis_recipe" },
+    "tags": ["crafting_table"],
+    "pattern": ["###", "###", "###"],
+    "key": { "#": { "item": "minecraft:diamond" } },
+    "unlock": [{ "item": "minecraft:diamond" }],
+    "result": { "item": "monaddon:rubis", "count": 1 }
+  }
+}

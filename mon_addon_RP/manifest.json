@@ -1,0 +1,13 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "Mon Addon RP",
+    "description": "Textures du rubis",
+    "uuid": "1e05481b-532e-446e-bf9c-5ea814081c95",
+    "version": [1, 0, 0],
+    "min_engine_version": [1, 21, 0]
+  },
+  "modules": [
+    { "type": "resources", "uuid": "98904ff2-99b7-4031-9db6-9b82b6750ec9", "version": [1, 0, 0] }
+  ]
+}

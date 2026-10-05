@@ -1,0 +1,16 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "Mon Addon BP",
+    "description": "Ajoute un rubis",
+    "uuid": "faaf9633-9f56-4451-b693-3493a1679f0f",
+    "version": [1, 0, 0],
+    "min_engine_version": [1, 21, 0]
+  },
+  "modules": [
+    { "type": "data", "uuid": "bc1ca52b-d07c-4387-84f5-97111098b048", "version": [1, 0, 0] }
+  ],
+  "dependencies": [
+    { "uuid": "1e05481b-532e-446e-bf9c-5ea814081c95", "version": [1, 0, 0] }
+  ]
+}
