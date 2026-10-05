@@ -12,6 +12,7 @@ via un Bedrock Dedicated Server (BDS) lancé sur un PC.
 | `scripts/install-server.ps1` | Windows : installe le BDS, déploie l'addon, lance le serveur |
 | `scripts/install-server.sh` | Linux : idem |
 | `scripts/fix-firewall.ps1` | Windows : profil réseau Privé + règles pare-feu (diagnostic) |
+| `scripts/restore-firewall.ps1` | Windows : supprime ces règles après les tests (`-Public` pour repasser le réseau en Public) |
 
 ## 1. Lancer le serveur sur le PC
 
@@ -85,3 +86,9 @@ Les erreurs de l'addon s'affichent dans la console du serveur.
 2. Dans la console du serveur, tape `stop`.
 3. Relance le script : il redéploie les packs et redémarre le serveur.
 4. Reconnecte-toi depuis la Switch.
+
+## 5. Après les tests : tout remettre comme avant
+
+- **PC** : `powershell -ExecutionPolicy Bypass -File scripts\restore-firewall.ps1` (supprime les règles pare-feu).
+- **Switch** : Paramètres DNS → **Automatique** (sinon toutes les requêtes DNS passent par BedrockConnect
+  et les serveurs partenaires restent redirigés).

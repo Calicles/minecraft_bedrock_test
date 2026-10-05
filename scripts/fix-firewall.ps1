@@ -41,10 +41,10 @@ Write-Host '== Ajout des règles Minecraft BDS =='
 Get-NetFirewallRule -DisplayName 'Minecraft BDS*' -ErrorAction SilentlyContinue | Remove-NetFirewallRule
 # 7551 : découverte LAN des versions récentes de Bedrock
 New-NetFirewallRule -DisplayName 'Minecraft BDS (UDP 19132-19133, 7551)' -Direction Inbound -Protocol UDP `
-    -LocalPort 19132,19133,7551 -Action Allow -Profile Any | Out-Null
+    -LocalPort 19132,19133,7551 -Action Allow -Profile Private | Out-Null
 if (Test-Path $Exe) {
     New-NetFirewallRule -DisplayName 'Minecraft BDS (programme)' -Direction Inbound -Program $Exe `
-        -Action Allow -Profile Any | Out-Null
+        -Action Allow -Profile Private | Out-Null
 }
 Write-Host '  OK'
 
