@@ -39,8 +39,9 @@ foreach ($r in $rules) {
 # 3. Règles d'autorisation (port UDP 19132/19133 + programme)
 Write-Host '== Ajout des règles Minecraft BDS =='
 Get-NetFirewallRule -DisplayName 'Minecraft BDS*' -ErrorAction SilentlyContinue | Remove-NetFirewallRule
-New-NetFirewallRule -DisplayName 'Minecraft BDS (UDP 19132-19133)' -Direction Inbound -Protocol UDP `
-    -LocalPort 19132,19133 -Action Allow -Profile Any | Out-Null
+# 7551 : découverte LAN des versions récentes de Bedrock
+New-NetFirewallRule -DisplayName 'Minecraft BDS (UDP 19132-19133, 7551)' -Direction Inbound -Protocol UDP `
+    -LocalPort 19132,19133,7551 -Action Allow -Profile Any | Out-Null
 if (Test-Path $Exe) {
     New-NetFirewallRule -DisplayName 'Minecraft BDS (programme)' -Direction Inbound -Program $Exe `
         -Action Allow -Profile Any | Out-Null
