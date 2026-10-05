@@ -41,7 +41,17 @@ accepte pour les **réseaux privés** (port UDP 19132).
 
 ## 2. Se connecter depuis la Switch
 
-La Switch ne permet pas d'ajouter un serveur par IP. On passe par **BedrockConnect** :
+### Méthode A : partie LAN (sans DNS, à essayer en premier)
+
+Le serveur s'annonce sur le réseau local (`enable-lan-visibility=true`).
+La Switch et le PC doivent être sur le **même réseau** (même box / même Wi-Fi).
+
+Minecraft → Jouer → onglet **Amis** → section **Parties LAN** → clique sur le serveur.
+
+Cette méthode ne passe pas par Internet ; elle peut fonctionner sans abonnement
+Nintendo Switch Online (à vérifier sur ta console : si Minecraft demande l'abonnement, passe à la méthode B).
+
+### Méthode B : BedrockConnect (nécessite Nintendo Switch Online)
 
 1. Switch → Paramètres → Internet → ta connexion → Modifier les paramètres →
    **Paramètres DNS : Manuel** → DNS primaire = l'IP indiquée dans le README de
@@ -49,7 +59,7 @@ La Switch ne permet pas d'ajouter un serveur par IP. On passe par **BedrockConne
 2. Lance Minecraft → Jouer → onglet **Serveurs** → clique sur n'importe quel serveur partenaire.
 3. Le menu BedrockConnect s'ouvre → **Connect to a Server** → IP affichée par le script, port `19132`.
 
-La Switch et le PC doivent être sur le même réseau. Un abonnement Nintendo Switch Online est requis.
+Nintendo propose un essai gratuit de 7 jours de Nintendo Switch Online.
 
 ## 3. Tester l'addon
 
