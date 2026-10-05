@@ -11,6 +11,7 @@ via un Bedrock Dedicated Server (BDS) lancé sur un PC.
 | `mon_addon_RP/` | Resource Pack : texture, icône, noms FR/EN |
 | `scripts/install-server.ps1` | Windows : installe le BDS, déploie l'addon, lance le serveur |
 | `scripts/install-server.sh` | Linux : idem |
+| `scripts/fix-firewall.ps1` | Windows : profil réseau Privé + règles pare-feu (diagnostic) |
 
 ## 1. Lancer le serveur sur le PC
 
@@ -39,32 +40,43 @@ Si le téléchargement automatique échoue, télécharge le zip sur
 Au premier lancement, Windows demande d'autoriser `bedrock_server.exe` dans le pare-feu :
 accepte pour les **réseaux privés** (port UDP 19132).
 
-## 2. Se connecter depuis la Switch
+## 2. Se connecter depuis la Switch (via BedrockConnect)
 
-### Méthode A : partie LAN (sans DNS, à essayer en premier)
+Prérequis : **Nintendo Switch Online** + **compte Microsoft connecté** dans Minecraft
+(bouton « Se connecter avec un compte Microsoft » du menu principal, code à saisir sur <https://aka.ms/remoteconnect>).
+Sans compte Microsoft, l'onglet Serveurs affiche « Vous êtes hors ligne ».
 
-Le serveur s'annonce sur le réseau local (`enable-lan-visibility=true`).
-La Switch et le PC doivent être sur le **même réseau** (même box / même Wi-Fi).
+> La découverte « Parties LAN » ne fonctionne pas sur Switch : le « Réseau local » de la Switch
+> ne sert qu'à jouer avec d'autres Switch à proximité.
 
-Minecraft → Jouer → onglet **Amis** → section **Parties LAN** → clique sur le serveur.
+1. Switch → Paramètres de la console → Internet → Paramètres Internet → ton Wi-Fi → Modifier les paramètres →
+   **Paramètres DNS : Manuel** → DNS primaire `104.238.130.180`, DNS secondaire `8.8.8.8`
+   (adresse à revérifier sur <https://github.com/Pugmatt/BedrockConnect>).
+2. **Éteins complètement** la Switch puis rallume-la (vide le cache DNS).
+3. Minecraft → Jouer → **Serveurs** → choisis un serveur compatible : **Lifeboat, Mineville, The Hive, Galaxite ou Enchanted**
+   (les autres, comme CubeCraft, ne redirigent pas).
+4. Menu BedrockConnect → **Connect to a Server** → IP du PC (affichée par le script), port `19132`, coche « Add to server list ».
 
-Cette méthode ne passe pas par Internet ; elle peut fonctionner sans abonnement
-Nintendo Switch Online (à vérifier sur ta console : si Minecraft demande l'abonnement, passe à la méthode B).
-
-### Méthode B : BedrockConnect (nécessite Nintendo Switch Online)
-
-1. Switch → Paramètres → Internet → ta connexion → Modifier les paramètres →
-   **Paramètres DNS : Manuel** → DNS primaire = l'IP indiquée dans le README de
-   <https://github.com/Pugmatt/BedrockConnect>, DNS secondaire = `8.8.8.8`.
-2. Lance Minecraft → Jouer → onglet **Serveurs** → clique sur n'importe quel serveur partenaire.
-3. Le menu BedrockConnect s'ouvre → **Connect to a Server** → IP affichée par le script, port `19132`.
-
-Nintendo propose un essai gratuit de 7 jours de Nintendo Switch Online.
+Pour revenir à la normale : Paramètres DNS → **Automatique**.
 
 ## 3. Tester l'addon
 
-En jeu : `/give @s monaddon:rubis`, ou crafte 9 diamants sur un établi.
-Les erreurs de l'addon (JSON invalide, identifiant inconnu…) s'affichent dans la console du serveur.
+1. Dans la console du serveur : `op TonPseudoXbox` (droits pour les commandes).
+2. Sur la Switch, ouvre le chat (**flèche droite** de la croix) : `/give @s monaddon:rubis`.
+   Ou inventaire créatif (X) → recherche « Rubis ». Ou établi : 9 diamants → 1 rubis.
+
+Les erreurs de l'addon s'affichent dans la console du serveur.
+
+## Dépannage
+
+| Symptôme | Cause / solution |
+|---|---|
+| « Vous êtes hors ligne » dans Serveurs | Compte Microsoft non connecté dans Minecraft |
+| Le serveur partenaire s'ouvre normalement | Serveur non compatible avec la redirection, ou DNS en cache → éteindre la Switch |
+| « Vous n'êtes pas invité à jouer sur ce serveur » (code *Spyglass*) | Liste blanche active : `allow-list=false` (le script le règle) ou `allowlist add TonPseudoXbox` |
+| Connexion refusée sans message clair | Version du serveur différente de celle de la Switch (bas droite du menu principal) |
+| Le serveur n'est pas joignable | `scripts\fix-firewall.ps1` (profil réseau Privé + règles pare-feu, se relance en admin) |
+| Rubis violet/noir | Resource pack non téléchargé : se reconnecter, augmenter la `version` du manifest |
 
 ## 4. Après une modification
 
