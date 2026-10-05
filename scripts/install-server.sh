@@ -49,6 +49,7 @@ set_prop allow-cheats true
 set_prop texturepack-required true
 set_prop content-log-file-enabled true
 set_prop enable-lan-visibility true
+set_prop allow-list false
 LEVEL_NAME="$(grep '^level-name=' "$PROPS" | cut -d= -f2- | tr -d '\r')"
 
 # 3. Copie des packs + activation sur le monde

@@ -52,6 +52,7 @@ $wanted = [ordered]@{
     'texturepack-required' = 'true'
     'content-log-file-enabled' = 'true'
     'enable-lan-visibility' = 'true'
+    'allow-list'           = 'false'
 }
 foreach ($key in $wanted.Keys) {
     if ($props -match "^$key=") {
